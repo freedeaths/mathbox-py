@@ -23,17 +23,33 @@ def median(samples) :
 # TODO:
 # Correlation with time shift
 # https://anomaly.io/understand-auto-cross-correlation-normalized-shift/index.html#/time_shift
-def ncc(x,y):
+def _ncc(x,y):
     x_mean = mean(x)
     y_mean = mean(y)
     x_qsum  = 0
     y_qsum  = 0
     xy_sum  = 0
     for i in range(len(x)):
-        x_qsum += (x[i] - x_mean) ** 2
-        y_qsum += (y[i] - y_mean) ** 2
+        x_qsum += (x[i] - x_mean) ** 2 + 1e-10
+        y_qsum += (y[i] - y_mean) ** 2 + 1e-10
         xy_sum += (x[i] - x_mean) * (y[i] - y_mean)
     return xy_sum / (x_qsum * y_qsum) ** 0.5
+
+def ncc(x,y,lag_max=20):
+    i = len(x)
+    j = len(y)
+    if lag_max >= min(i,j):
+        lag_max = min(i,j) - 1
+    ncc_list = []
+    result = []
+    # can be optimized by i > j or i < j
+    new_x = [0 for _ in range(j - 1)] + x + [0 for _ in range(j - 1)]
+    for lag in range(i + j -1):
+        ncc_list.append((lag + 1 - i, _ncc(y, new_x[lag:lag+j])))
+    for lag in range(i - lag_max - 1, i + lag_max):
+        result.append(ncc_list[lag])
+    return result
+    
 
 def _operator_4_e_dist(a,b):
     # distance[i * len_a + j(0~len_b)]

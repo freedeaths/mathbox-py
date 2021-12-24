@@ -18,7 +18,7 @@ if __name__ == '__main__':
 
     moved_seasonality = [x / y for x, y in zip(moved_trend, seasonality)]
 
-    outlier = noise_outlier(moved_seasonality, 6)
+    outlier = noise_outlier(moved_seasonality, 3)
 
     fig, axs = plt.subplots(4, 1)
     axs[0].plot(timeseries, 'b')

@@ -3,7 +3,7 @@ from setuptools import find_packages, setup
 setup(
     name='mathbox',
     python_requires='>=3.8.0',
-    version='0.0.4',
+    version='0.0.5',
     description="A math toolbox.",
     author='freedeaths',
     author_email='register917@gmail.com',

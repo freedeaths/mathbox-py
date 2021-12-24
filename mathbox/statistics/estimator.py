@@ -7,11 +7,17 @@ def mean(samples):
 ddof == 1 provides an unbiased estimator of the variance of the infinite population.
 ddof == 0 provides a maximum likelihood estimate of the variance for normally distributed variables.
 """
-def std(samples, ddof=1):
+def var(samples, ddof=1):
     if ddof != 1 and ddof != 0:
         raise ValueError("ddof must be 0 or 1")
     x_bar = mean(samples)
     return sum([(x - x_bar) ** 2 for x in samples]) / (len(samples) - ddof)
+
+def std(samples, ddof=1):
+    if ddof != 1 and ddof != 0:
+        raise ValueError("ddof must be 0 or 1")
+    return var(samples, ddof=ddof) ** 0.5
+
 
 def median(samples) :
     samples = sorted(samples)

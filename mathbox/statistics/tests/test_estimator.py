@@ -7,9 +7,13 @@ def test_mean():
     assert mean([1,2,3,4,5]) == 3.0
     assert mean([1.0,2.0,3.0,4.0,5.0]) == 3.0
     
+def test_var():
+    assert var([1,2,3,4,5],ddof=1) == 2.5
+    assert var([1,2,3,4,5],ddof=0) == 2.0
+
 def test_std():
-    assert std([1,2,3,4,5],ddof=1) == 2.5
-    assert std([1,2,3,4,5],ddof=0) == 2.0
+    assert std([1,2,3,4,5],ddof=1) == approx(1.5811, abs=0.001)
+    assert std([1,2,3,4,5],ddof=0) == approx(1.4142, abs=0.001)
 
 def test_median():
     assert median([1,2,4,7,6]) == 4

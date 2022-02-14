@@ -7,7 +7,7 @@ long_description = (this_directory / "README.md").read_text()
 setup(
     name='mathbox',
     python_requires='>=3.8.0',
-    version='0.0.6',
+    version='0.0.7',
     description="A math toolbox.",
     author='freedeaths',
     author_email='register917@gmail.com',

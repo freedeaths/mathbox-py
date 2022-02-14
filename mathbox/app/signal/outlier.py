@@ -3,7 +3,9 @@ from mathbox.statistics.estimator import mean, std
 def noise_outlier(noise, bias=3):
     noise_mean = mean(noise)
     noise_std = std(noise)
-    return [(i,x) for i,x in enumerate(noise) if abs(x - noise_mean) > bias * noise_std]
+    outlier_lo = [(i,x) for i,x in enumerate(noise) if x < noise_mean - bias * noise_std]
+    outlier_hi = [(i,x) for i,x in enumerate(noise) if x > noise_mean + bias * noise_std]
+    return outlier_lo, outlier_hi
 
 def simple_outlier(series, bias=3):
     sorted_series = sorted(series)

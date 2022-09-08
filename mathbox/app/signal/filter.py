@@ -53,7 +53,7 @@ def f_lowpass_filter(timeseries, dt, n=10, f_min=0.2):
         amp_desc_pos = amp_desc_pos[:n]
     amp_max_n_pos = [amp_max_pos[i] for i in amp_desc_pos]
 
-    freq = [f_half[x] for x in amp_desc_pos]
+    freq = [f_half[x] for x in amp_max_n_pos]
     for i in range(len(f_sig)):
         if i not in amp_max_n_pos:
             f_sig[i] = 0
